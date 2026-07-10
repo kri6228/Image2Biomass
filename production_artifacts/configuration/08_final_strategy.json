@@ -1,0 +1,5 @@
+{
+    "weight_classical": 1.0,
+    "weight_cnn": 0.0,
+    "expected_mean_rmse": 11.948850329422298
+}
