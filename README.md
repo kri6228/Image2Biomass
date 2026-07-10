@@ -473,8 +473,8 @@ Image2Biomass/
 |   +---app.py
 |
 +---assets/
-|   +---model_comparison.png
-|   +---actual_vs_predicted.png
+|   +---08_model_comparison.png
+|   +---08_best_strategy_actual_vs_predicted.png
 |
 +---notebooks/
 |   +---01_data_exploration.ipynb
@@ -770,7 +770,8 @@ Predictions should be interpreted as model estimates and should not replace prof
 # 👨‍💻 Author
 
 **Krish R Patel**
-
+AI/ML Intern
+DATA VIDWAN
 Computer Engineering  
 LDRP Institute of Technology and Research
 
