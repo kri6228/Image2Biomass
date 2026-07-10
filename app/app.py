@@ -51,13 +51,11 @@ st.set_page_config(
 # CONSTANTS
 # ============================================================
 
-TRAIN_CSV_PATH = (
-    PROJECT_ROOT
-    / "data"
-    / "raw"
-    / "train.csv"
-)
+APP_DIR = Path(__file__).resolve().parent
 
+SAMPLE_DATA_DIR = APP_DIR / "sample_data"
+SAMPLE_CSV_PATH = SAMPLE_DATA_DIR / "samples.csv"
+SAMPLE_IMAGE_DIR = SAMPLE_DATA_DIR / "images"
 
 VALID_STATES = [
     "NSW",
@@ -418,10 +416,10 @@ def render_custom_css():
 @st.cache_data
 def load_training_metadata():
 
-    if not TRAIN_CSV_PATH.exists():
+    if not SAMPLE_CSV_PATH.exists():
         return pd.DataFrame()
 
-    train_df = pd.read_csv(TRAIN_CSV_PATH)
+    samples_df = pd.read_csv(SAMPLE_CSV_PATH)
 
     required_columns = [
         "image_path",
@@ -432,15 +430,16 @@ def load_training_metadata():
     ]
 
     if not all(
-        column in train_df.columns
+        column in samples_df.columns
         for column in required_columns
     ):
         return pd.DataFrame()
 
     return (
-        train_df
+        samples_df[
+            required_columns
+        ]
         .drop_duplicates("image_path")
-        [required_columns]
         .reset_index(drop=True)
     )
 
@@ -481,10 +480,10 @@ def build_sample_config(number_of_samples=6):
         try:
             relative_path = Path(str(row["image_path"]))
 
+            # samples.csv contains paths such as:
+            # images/ID1011485656.jpg
             image_path = (
-                PROJECT_ROOT
-                / "data"
-                / "raw"
+                SAMPLE_DATA_DIR
                 / relative_path
             )
 
